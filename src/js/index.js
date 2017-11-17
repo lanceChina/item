@@ -45,11 +45,66 @@ document.addEventListener('DOMContentLoaded',function(){
             $lastIdx=$idx;
         }
     
-    //--------------nTop---------------
-    //
+//=====================fixed=============
+//
+    function lt(){
+      var $fix=$('.fix');
+        var $img_all=$fix.find('div img').next('img').hide();
+        //console.log($fix);
+        $fix.children('div').on('mouseover',function(){
+            $(this).find('img').first().hide().siblings('img').show();
+            $(this).css({
+                backgroundColor:'#99CC00',
+            });
+            $(this).find('p').css('color','#fff');
+        }).on('mouseleave',function(){
+            $(this).find('img').first().show().siblings('img').hide();
+            $(this).css('backgroundColor','#fff');
+            $(this).find('p').css('color','black');
+        });
+        //=============返回顶部效果
+        var $top=$('.toTop');
+        window.onscroll=function(){
+            var totop=window.scrollY;
+            if(totop>=500){
+                //$top.css('display','block
+                $top.fadeIn();                 
+            }else{
+                //$top.css('display','none');
+                $top.fadeOut();
+            }
+        }
+        $top.on('click',function(){
+            var $speed=10;
+            var $timer=setInterval(function(){
+                var $hight=window.scrollY;
+                var $speed=Math.ceil($hight/10);
+                $hight-=$speed;
+                if($hight<=0){
+                    clearInterval($timer);
+                    $hight=0;
+                }
+                window.scrollTo(0,$hight);
+            },30);
 
+        });
 
-// tab切换
+        //楼梯导航效果
+        var $floors=$('.floors');
+        var $img=$floors.find('div img').next('img').hide();
+        //console.log($fix);
+        $floors.children('div').on('mouseover',function(){
+            $(this).find('img').first().hide().siblings('img').show();
+            $(this).css({
+                backgroundColor:'#99CC00',
+            });
+        }).on('mouseleave',function(){
+            $(this).find('img').first().show().siblings('img').hide();
+            $(this).css('backgroundColor','#fff');
+        });
+    }
+    lt();
+//====================== tab切换======================
 // 
     var $tb=$('.ntop3');
     var $divs=$tb.find('div');
@@ -132,7 +187,7 @@ document.addEventListener('DOMContentLoaded',function(){
     },2000);
 //================F1商品传参==========
     var f1_rt=document.querySelector('.f1_rt');
-    var carlist=[];console.log(carlist);
+    var carlist=[];//console.log(carlist);
     var cookies = document.cookie;
         if(cookies.length>0){
             cookies = cookies.split('; ');

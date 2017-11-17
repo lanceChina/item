@@ -1,14 +1,48 @@
 * { margin: 0; padding: 0; font-size: 12px; color: black; }
 
+#fix { position: fixed; right: 40px; top: 50%; transform: translate(0, -50%); }
+
+#fix div { padding-bottom: 5px; padding: 2px 5px; border: 1px solid #ccc; background-color: #fff; }
+
+#fix div img { display: block; width: 36px; height: 36px; margin: 1px auto; }
+
+#fix div p { text-align: center; }
+
+#fix div:nth-child(1) { position: relative; }
+
+#fix div:nth-child(1) .pos { display: block; position: absolute; left: -200px; top: -170px; width: 200px; height: 257px; }
+
+#fix div:nth-child(3) { position: relative; }
+
+#fix div:nth-child(3) .pos { display: block; position: absolute; left: -200px; top: 0; width: 201px; height: 48px; }
+
+#fix div:nth-child(4) { position: relative; }
+
+#fix div:nth-child(4) span { display: block; width: 15px; height: 15px; background-color: red; color: white; border-radius: 50%; text-align: center; line-height: 15px; position: absolute; right: 5px; top: 3px; }
+
+#fix div:last-child { display: none; }
+
 #details { width: 1200px; min-height: 100px; margin: 0 auto; margin-top: 50px; overflow: hidden; }
 
 #details .dt, #details .dt_rt { float: left; }
 
-#details .dt { width: 400px; height: 400px; border: 1px solid #ccc; }
+#details .dt { width: 400px; height: 400px; border: 1px solid #ccc; position: relative; }
 
 #details .dt img { width: 400px; height: 400px; }
 
-#details .dt_rt { width: 620px; min-height: 100px; margin-left: 40px; }
+#details .dt .lbt { height: 70px; width: 400px; position: absolute; left: 0; bottom: -80px; }
+
+#details .dt .lbt img:nth-child(2) { margin-left: 21px; }
+
+#details .dt .lbt img { width: 66px; height: 66px; border: 1px solid #ccc; margin: 1px; }
+
+#details .dt .lbt .b_left, #details .dt .lbt .b_right { width: 20px; height: 68px; position: absolute; border: none; }
+
+#details .dt .lbt .b_left { left: 0; top: 0; }
+
+#details .dt .lbt .b_right { right: 0; top: 0; }
+
+#details .dt_rt { width: 620px; min-height: 100px; margin-left: 40px; position: relative; }
 
 #details .dt_rt p { color: #666; }
 
@@ -32,4 +66,48 @@
 
 #details .dt_rt .gos i { padding-left: 10px; }
 
-#details .dt_rt .sx { height: 200px; border: 1px solid #ccc; }
+#details .dt_rt .s1 { padding: 20px 0 10px 0; }
+
+#details .dt_rt .sx span { padding: 0 10px; }
+
+#details .dt_rt .sx .p1, #details .dt_rt .sx .p2, #details .dt_rt .sx .p3, #details .dt_rt .sx s { display: inline-block; height: 30px; line-height: 30px; }
+
+#details .dt_rt .sx .p2, #details .dt_rt .sx .p3 { border: 1px solid #ccc; }
+
+#details .dt_rt .sx .p1 { border-radius: 5px; margin: 0 10px; width: 60px; text-align: center; color: white; background-color: #2DC24A; }
+
+#details .dt_rt .sx .p2 { width: 40px; text-align: center; }
+
+#details .dt_rt .sx .p2 i { display: inline-block; height: 30px; width: 20px; border: 1px solid #ccc; }
+
+#details .dt_rt .sx .p3 { width: 20px; border-left: none; line-height: 30px; text-align: center; background-color: #F3F3F3; background: url("../img/imgs.fw.png") no-repeat -358px -80px; color: #F3F3F3; background-color: #F3F3F3; }
+
+#details .dt_rt .sx s { width: 30px; text-align: center; background-color: #F3F3F3; border: 1px solid #ccc; }
+
+#details .dt_rt .sx input { width: 40px; height: 28px; text-align: center; margin: 0 5px; }
+
+#details .dt_rt .s2 { margin-left: 50px; }
+
+#details .dt_rt .gwc { margin-top: 15px; }
+
+#details .dt_rt .gwc span { display: inline-block; width: 150px; height: 40px; text-align: center; line-height: 40px; font-size: 16px; border-radius: 5px; }
+
+#details .dt_rt .gwc .sp1 { color: white; background-color: #FF6600; margin-left: 60px; }
+
+#details .dt_rt .gwc .sp2 { color: #FF6600; border: 1px solid #FF6600; margin-left: 10px; }
+
+#details .dt_rt .gwc .sp1, #details .dt_rt .gwc .sp2:hover { cursor: pointer; }
+
+#details .dt_rt .ser { margin: 10px 0 50px 0; }
+
+#details .dt_rt .ser span { margin-left: 5px; display: inline-block; font-size: 14px; line-height: 28px; }
+
+#details .dt_rt .ser span s { display: inline-block; width: 22px; height: 22px; float: left; margin: 3px 2px; }
+
+#details .dt_rt .ser span .s5 { background: url("../img/imgs.fw.png") no-repeat -244px -237px; }
+
+#details .dt_rt .ser span .s2 { background: url("../img/imgs.fw.png") no-repeat -244px -273px; }
+
+#details .dt_rt .ser span .s3 { background: url("../img/imgs.fw.png") no-repeat -244px -312px; }
+
+#details .dt_rt .ser span .s4 { background: url("../img/imgs.fw.png") no-repeat -244px -347px; }
