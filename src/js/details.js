@@ -9,17 +9,17 @@ jQuery(function($){
             if(temp[0]=='carlist'){
                 carlist=JSON.parse(temp[1]);
                 carlist=carlist.slice(-1);
+                console.log(carlist);
             }
         });
     }
-
 
     var dtu=document.createElement('div');
     dtu.className="dtu";
     dtu.innerHTML=carlist.map(function(item){
         return `
                 <div class="dt" data-guid="${item.id}">
-                    <img src='${item.imgurl}'/>
+                    <img src='${item.imgurl}' class="goods_imgurl"/>
                     <div class="lbt">
                         <img src="../img/m31.bmp" class="b_left"/>
                         <img src='${item.imgurl}'/>
@@ -28,13 +28,13 @@ jQuery(function($){
                     </div>
                 </div>
                 <div class="dt_rt">
-                    <p class="det">${item.title}</p>
+                    <p class="det goods_title">${item.title}</p>
                     <p class="gud_de">
                         HAN MEGA-TR钛塑近视眼镜架-亮黑(HD3101-F02) HAN MEGA-TR钛塑近视眼镜架-亮黑
                     </p>
-                    <p class="pric"><span>可得价:</span>${item.price}<i>${item.save}</i></p>
+                    <p class="pric"><span>可得价:</span><span class="goods_price">${item.price}</span><i>${item.save}</i></p>
                     <p class="de"><span>促销信息：</span>无</p>
-                    <p class="gos">商品编号:<span>${item.id}</span>库存状况:<i>有货</i></p>
+                    <p class="gos">商品编号:<span class="goods_id">${item.id}</span>库存状况:<i>有货</i></p>
                     <p class="sx s1">
                         属性选择:<span class="p1">右眼R</span>
                         光度：<span class="p2 xz1">请选择:</span><span class="p3 p4">.</span>
@@ -120,18 +120,7 @@ jQuery(function($){
     }).join('');
     details.innerHTML='';
     details.appendChild(dtu);
-    //加入购物车效果
-    var $numb1=$('.numb1');
-    var $numb2=$('.numb2');
-    var $sCar=$('.sp2');
-    $sCar.on('click',function(){
-        var $numb1_val=$numb1.val();
-        var $numb2_val=$numb2.val();
-       
-
-    });
-   
-
+    
     //设置样式
     $('.list1').css({
         overflow:'hidden',
@@ -155,7 +144,6 @@ jQuery(function($){
         top:415,
         background:'#fff',
         display:'none'
-
     });
     $('.list1').find('span').css({
         display:'block',
@@ -199,6 +187,7 @@ jQuery(function($){
         e.stopPropagation();
     });
 //度数选择效果
+
     $('.list1').find('span').on('mouseover',function(){
         $(this).css('borderColor','#f00');
     }).on('mouseout',function(){
@@ -210,17 +199,23 @@ jQuery(function($){
     }).on('mouseout',function(){
         $(this).css('borderColor','#ccc');
     });
+
 //选择好度数后，隐藏列表，同时将内容显示到显示栏中
 //事件委托
     //(1) 列表1的选择
+    var $high_1;
     $('.list1').find('span').on('click',function(){
         var $txt=$(this).html();
         $('.xz1').html($txt);
+        $high_1=$txt;//用于后面添加到购物车，而存储的数据
+        
     });
     //(1) 列表2的选择
+    var $high_2;
     $('.list2').find('span').on('click',function(){
         var $txt=$(this).html();
         $('.xz2').html($txt);
+        $high_2=$txt;////用于后面添加到购物车，而存储的数据
     });
     //(2)数量加或减
     var $put1=$('.numb1');
@@ -231,31 +226,99 @@ jQuery(function($){
     var $j2=$('.j2');
     var $jia2=$('.jia2');
         //up
+        var $val;
         $j1.on('click',function(e){
-            var $val=$put1.get(0).value--;
+            $put1.get(0).value--;
+            $val=$put1.get(0).value;
             if($val<=0){
                 $('.numb1').get(0).value=0;
-                return false;
+                return;
             }
-
         });
         $jia1.on('click',function(){
+            //$put1.get(0).value++;
             $put1.get(0).value++;
+            $val=$put1.get(0).value;
         });
+        // $val=$('.numb1').val();
         //down
+        var $val_2;
         $j2.on('click',function(){
-            var $val_2=$put2.get(0).value--;
+            $put2.get(0).value--;
+            $val_2=$put2.get(0).value;
             if($val_2<=0){
                 $('.numb2').get(0).value=0;
                 return;
             }
         });
         $jia2.on('click',function(){
-            var $val_2=$put2.get(0).value++;
+            $put2.get(0).value++;
+            $val_2=$put2.get(0).value;
         });
+        // $val_2=$('.numb2').val();
+        //console.log($val_2);
+//点击添加到购物车按钮，飞入购物车效果
+        
+    var $cart=$('.cart');
+    //加入购物车效果
+
+   //将有关的数据，写入到cookie中
+    var carts=[];
+    var cook=document.cookie;
+    if(cook.length>0){
+        cook=cook.split('; ');
+        cook.forEach(function(item){
+            var temp=item.split('=');
+            if(temp[0]=='carts'){
+                carts=JSON.parse(temp[1]);
+                console.log(carts);
+            }
+        });
+    }
+
+    var $ct=$('.sp2');//添加到购物车按钮
+    $ct.on('click',function(){
+        console.log($high_1,$high_2,$('.numb1').val(),$('.numb2').val());
+        var guid=$('.goods_id').html();
+        var has=false;
+        for(var i=0;i<carts.length;i++){
+            if(carts[i].id===guid){
+                carts[i].qty++;
+                $high_1=$high_1;
+                $high_2=$high_2;
+                has=true;
+                break;
+            }
+        }
+        console.log($('.goods_price').html());
+        var qty;
+        if(!has){
+            var goods={
+                imgurl:$('.goods_imgurl').get(0).src,
+                title:$('.goods_title').get(0).innerText,
+                price:$('.goods_price').get(0).innerText,
+                qty:1,
+                id:guid,
+                bright_right:$high_1,
+                bright_left:$high_2,
+                bright_right_qty:$('.numb1').val(),
+                bright_left_qty:$('.numb2').val()
+            }
+            
+        }
+       
+        carts.push(goods);
+        console.log(carts);
+        var date=new Date();
+        date.setDate(date.getDate()+15);
+        document.cookie='carts='+JSON.stringify(carts)+';expires='+date.toUTCString();
+        $('.cart').find('span').get(0).innerHTML=carts[0].qty;
+    });
+       
 
         
-//加入购物车
+// 固定定位的购物车栏目
+
     var $fix=$('#fix');
     var $img_all=$fix.find('div img').next('img').hide();
     $fix.children('div').on('mouseover',function(){
@@ -269,7 +332,9 @@ jQuery(function($){
         $(this).css('backgroundColor','#fff');
         $(this).find('p').css('color','black');
     });
+
     //=============返回顶部效果
+    
     var $top=$('.toTop');
     window.onscroll=function(){
         var totop=window.scrollY;

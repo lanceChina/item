@@ -206,7 +206,7 @@ document.addEventListener('DOMContentLoaded',function(){
                 var div_child=current_div.children;
                 var guid=current_div.getAttribute('data-guid');
                 var current_floor=current_div.parentNode;
-                console.log(target);
+                //console.log(target);
                 var has=false;
                 if(!has){
                     var goods={
