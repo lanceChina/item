@@ -48,7 +48,7 @@
 
 .bg .reg p:nth-child(3) input { padding-left: 10px; width: 270px; }
 
-.bg .reg p:nth-child(3) i { display: block; width: 105px; height: 40px; right: 1px; position: absolute; background-color: #ccc; top: 5px; }
+.bg .reg p:nth-child(3) i { display: block; width: 105px; height: 40px; right: 1px; position: absolute; background-color: #ccc; top: 5px; color: #fff; font-size: 16px; text-align: center; line-height: 40px; }
 
 .bg .reg p:nth-child(4) { position: relative; }
 
@@ -58,6 +58,10 @@
 
 .bg .reg p:nth-child(5) del { background: url("../img/imgs.fw.png") no-repeat -133px -341px; }
 
-.bg .reg p:nth-child(7) a { display: block; color: #fff; font-size: 18px; width: 280px; height: 40px; border-radius: 6px; text-align: center; line-height: 40px; background-color: #FF6600; margin-top: 20px; }
+.bg .reg .success { color: green; }
+
+.bg .reg .fail { color: red; }
+
+.bg .reg p:nth-child(7) b { display: block; color: #fff; font-size: 18px; width: 280px; height: 40px; border-radius: 6px; text-align: center; line-height: 40px; background-color: #FF6600; margin-top: 10px; }
 
 .bg .reg p:last-child { margin-top: 15px; }

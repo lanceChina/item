@@ -2,7 +2,7 @@
     $servername='localhost';
     $username='root';
     $password='';
-    $database='lance';
+    $database='login';
 
     $conn=new mysqli($servername,$username,$password,$database);
 
